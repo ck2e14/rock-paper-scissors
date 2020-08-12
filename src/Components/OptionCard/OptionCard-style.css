@@ -5,6 +5,7 @@
    cursor: pointer;
    transition: all .25s; 
    border-radius: 30px;
+   z-index: 50;
 }
 
 .option-card-wrapper:hover {

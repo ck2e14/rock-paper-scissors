@@ -18,8 +18,7 @@ function App() {
   const [ counter, setCounter ] = useState();
   const [ firstPagePaint, setFirstPagePaint ] = useState(true);
   const [ activeBackgrounds, setActiveBackgrounds ] = useState(true)
-  // const [ rollNextRound, setRollNextRound ] = useState(false)
-
+  const [ lastOutcome, setLastOutcome ] = useState({winner: '', oppoChoice: ''})
 
   // General function-flow of app 
   // 1) User selects choice
@@ -38,9 +37,22 @@ function App() {
     setCounter();
     const opponentSelection = makeOpponentSelection();
     const winner = determineWinner(choice, opponentSelection);
+    setLastOutcome({winner: winner, choice: choice, oppoChoice: opponentSelection})
     console.log(`User chose: ${choice}, Opponent chose: ${opponentSelection}, Winner is: ${winner}`)
     endOfRoundSequence(winner, opponentSelection);
   }
+
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      setCounter(counter - 1);
+    }, 1000);
+    if (counter <= 0) { 
+      triggerRound('timer elapsed') 
+      clearInterval(countdownInterval)
+    }
+    return () => clearInterval(countdownInterval);
+  }, [counter]);
+
 
   const makeOpponentSelection = () => {
     const determinant = Math.floor(Math.random() * 3)
@@ -77,21 +89,9 @@ function App() {
   }
 
   const modalClickNextRound = () => {
-    // close modal, trigger countdown via setting a counter state value --> useEffect is watching counter state to know when to trigger 
     setShowModal(false)
     setCounter(5)
   }
-
-  useEffect(() => {
-    const countdownInterval = setInterval(() => {
-      setCounter(counter - 1);
-    }, 1000);
-    if (counter <= 0) { 
-      triggerRound('timer elapsed') 
-      clearInterval(countdownInterval)
-    }
-    return () => clearInterval(countdownInterval);
-  }, [counter]);
 
   const handleCountdownRender = () => {
     if(firstPagePaint) return <div className="welcomeMsg">Make a choice to start the game!</div>
@@ -100,17 +100,18 @@ function App() {
     // TODO: Put this user feedback inside the modal. Currently it just flashes briefly because the timer hitting 0 calls triggerRound() which clears the value, thus clearing the condition to display this message. 
     
     if(!firstPagePaint) {
-      if(counter > 0) return <div className="countdown-timer">Countdown: {counter}</div>
+      if(counter > 0) return <div className="countdown-timer">Countdown: <span>{counter}</span></div>
     }
   }
 
   const activeBackdrop = () => {
     if(activeBackgrounds === true ) {
       return (  
-      <BackgroundSlider
-      images={[paperbg, scissorsbg, rocksbg]}
-      duration={5} transition={.5} 
-    />)
+        <BackgroundSlider
+          images={[paperbg, scissorsbg, rocksbg]}
+          duration={7} transition={.25} 
+        />
+      )
     }
   }
 
@@ -118,25 +119,27 @@ function App() {
 
   return (
     <>
-      { showModal && <div className="shader-layer"></div> }
-      { showModal && <Modal nextRoundClick={modalClickNextRound} /> }
-      {/* replace hardcoded modal with function call that returns the Modal */}
-      {/* <img src={paperbg} alt="" className="main-bg"/> */}
-      <div className="App">
 
+      { showModal && <div className="shader-layer-end-of-round"></div> }
+      { showModal && <Modal nextRoundClick={modalClickNextRound} lastOutcome={lastOutcome}/> }
+
+      <div className="App">
+      
         {activeBackdrop()}
+
         <div className="toggle-active-backdrop-btn" onClick={() => toggleBackdrop()}>
-          Click to toggle active backdrop
+          Toggle active backdrop 
         </div>
 
         {handleCountdownRender()}
+
         <div className="title t1"><span>R</span>ock</div>
         <div className="title t2"><span>P</span>aper</div>
         <div className="title t3"><span>S</span>cissors</div>
 
         <div className="scorecard">
-          Your Score: {playerScore} <br/>
-          Opponent's Score: {opponentScore}
+          Your Score: <span>{playerScore}</span> <br/>
+          Opponent's Score: <span>{opponentScore}</span>
         </div>
         
         <div className="options-wrapper">
