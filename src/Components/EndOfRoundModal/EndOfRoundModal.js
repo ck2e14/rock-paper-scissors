@@ -16,25 +16,25 @@ const EndOfRoundModal = props => {
 
       if(choice === 'timer elapsed') return(
          <div className="">
-         You <span>lost</span> this round! <br/> You were beaten by your own indecision! Make sure to choose before the timer elapses.
+         You <span className='lost-span'>lost</span> this round! <br/> You were beaten by your own indecision! Make sure to choose before the timer elapses.
       </div>
       )
 
       if(winner === 'user') return(
          <div className="">
-            You <span>won</span> this round! <br/>A skilled performance! <br/> Your opponent chose {oppoChoice}.
+            You <span className='win-span'>won</span> this round! <br/>A skilled performance! <br/> Your opponent chose {oppoChoice}.
          </div>
       )
 
       if(winner === 'opponent') return (
          <div className="">
-            You <span>lost</span> this round! <br/> You were beaten by {oppoChoice}.
+            You <span className="lost-span">lost</span> this round! <br/> You were beaten by {oppoChoice}.
          </div>
       )
 
       if(winner === 'draw') return (
          <div className="">
-            You <span>drew</span> this round! <br/> Your opponent also chose {oppoChoice}. 
+            You <span className="drew-span">drew</span> this round! <br/> Your opponent also chose {oppoChoice}. 
          </div>
       )
    }

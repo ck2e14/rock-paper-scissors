@@ -13,7 +13,7 @@
    transform: translate(-50%, -50%);
    background-color: rgb(20, 20, 20);
    color: white;
-   cursor: progress !important;
+   cursor: pointer !important;
 }
 
 .round-feedback {
@@ -33,6 +33,7 @@
    transition: all .25s;
    border-radius: 5px;
    font-weight: bold;
+   user-select: none;
 }
 
 .next-round-btn:hover {
@@ -40,6 +41,19 @@
    color: cyan;
 }
 
-.round-feedback span {
+/* .round-feedback span {
    color: cyan;
+} */
+
+.win-span {
+   color: rgb(0, 255, 0) !important;
 }
+
+.lost-span {
+   color: red !important;
+}
+
+.drew-span{
+   color: cyan
+}
+
