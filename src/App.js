@@ -7,7 +7,7 @@ import rock from './Assets/Media/Rock.png'
 import paper from './Assets/Media/paper.png'
 import scissors from './Assets/Media/scissors.png'
 import scissorsbg from './Assets/Media/scissorsbg3.jpg'
-import rocksbg from './Assets/Media/rocksbg3.jpg'
+import rocksbg from './Assets/Media/rocksbg4.jpg'
 import paperbg from './Assets/Media/paperbg2.jpg'
 
 function App() {
