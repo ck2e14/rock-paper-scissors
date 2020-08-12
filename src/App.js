@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import BackgroundSlider from 'react-background-slider'
 import './App.css';
 import OptionCard from './Components/OptionCard/OptionCard';
 import Modal from './Components/EndOfRoundModal/EndOfRoundModal';
+import rock from './Assets/Media/Rock.png'
+import paper from './Assets/Media/paper.png'
+import scissors from './Assets/Media/scissors.png'
+import scissorsbg from './Assets/Media/scissorsbg1.jpg'
+import rocksbg from './Assets/Media/rocksbg1.jpg'
+import paperbg from './Assets/Media/paperbg1.jpg'
 
 function App() {
 
@@ -17,7 +24,7 @@ function App() {
     setCounter();
     const opponentSelection = makeOpponentSelection();
     const winner = determineWinner(choice, opponentSelection);
-    // console.log(`User chose: ${choice}, Opponent chose: ${opponentSelection}, Winner is: ${winner}`)
+    console.log(`User chose: ${choice}, Opponent chose: ${opponentSelection}, Winner is: ${winner}`)
     endOfRoundSequence(winner, opponentSelection);
   }
 
@@ -61,37 +68,45 @@ function App() {
     setCounter(5)
   }
 
-    useEffect(() => {
-      const countdownInterval = setInterval(() => {
-        setCounter(counter - 1);
-      }, 1000);
-      if (counter <= 0) { 
-        triggerRound('timer elapsed') 
-        clearInterval(countdownInterval)
-      }
-      return () => clearInterval(countdownInterval);
-    }, [counter]);
+  // useEffect(() => {
 
-    const handleCountdownRender = () => {
-      if(firstPagePaint) return <div className="welcomeMsg">Make a choice to start the game</div>
+  // },[])
 
-      if(counter === 0) return <div> Time's up! Make your choice before the timer elapses! </div> 
-      
-      if(!firstPagePaint) {
-        if(counter > 0) return <div>Countdown: {counter}</div>
-      }
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      setCounter(counter - 1);
+    }, 1000);
+    if (counter <= 0) { 
+      triggerRound('timer elapsed') 
+      clearInterval(countdownInterval)
     }
+    return () => clearInterval(countdownInterval);
+  }, [counter]);
 
+  const handleCountdownRender = () => {
+    if(firstPagePaint) return <div className="welcomeMsg">Make a choice to start the game!</div>
+
+    if(counter === 0) return <div> Time's up! Make your choice before the timer elapses! </div> 
+    // TODO: Put this user feedback inside the modal. Currently it just flashes briefly because the timer hitting 0 calls triggerRound() which clears the value, thus clearing the condition to display this message. 
+    
+    if(!firstPagePaint) {
+      if(counter > 0) return <div className="countdown-timer">Countdown: {counter}</div>
+    }
+  }
 
   return (
     <>
-    
+      { showModal && <div className="shader-layer"></div> }
       { showModal && <Modal nextRoundClick={modalClickNextRound} /> }
       {/* replace hardcoded modal with function call that returns the Modal */}
-      
+      <img src={paperbg} alt="" className="main-bg"/>
       <div className="App">
+ 
 
         {handleCountdownRender()}
+        <div className="title t1"><span>R</span>ock</div>
+        <div className="title t2"><span>P</span>aper</div>
+        <div className="title t3"><span>S</span>cissors</div>
 
         <div className="scorecard">
           Your Score: {playerScore} <br/>
@@ -99,15 +114,16 @@ function App() {
         </div>
         
         <div className="options-wrapper">
-          <OptionCard clickHandler={triggerRound} type='rock'/>
-          <OptionCard clickHandler={triggerRound} type='paper'/>
-          <OptionCard clickHandler={triggerRound} type='scissors'/>
+          <OptionCard clickHandler={triggerRound} type='rock' img={rock}/>
+          <OptionCard clickHandler={triggerRound} type='paper' img={paper}/>
+          <OptionCard clickHandler={triggerRound} type='scissors' img={scissors}/>
         </div>
 
       </div>
 
       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet"></link>
 
+    
     </>
   );
 }

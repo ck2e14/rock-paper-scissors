@@ -1,16 +1,30 @@
 * {
-  border-radius: 10px
+  border-radius: 10px;
+  font-family: 'Roboto', sans-serif;
+
 }
 
 .App {
   position: fixed;
-  color: white;
+  color: rgb(212, 212, 212);
   margin: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgb(34, 34, 34);
-  font-family: 'Roboto', sans-serif;
+  height: 96vh;
+  width: 96vw;
+  padding: .25%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(45, 110, 163, 0.178);
   font-weight: bold;
+}
+
+.main-bg {
+  max-height: 100%;
+  width: 100%;
+}
+
+.App span { 
+  color: rgb(0, 0, 0) 
 }
 
 .scorecard {
@@ -31,3 +45,90 @@
   align-items: center;
 }
 
+.shader-layer {
+  height: 100vh;
+  width: 100vw;
+  z-index: 98;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.76);
+  -webkit-animation: fade-in .2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  animation: fade-in .2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+.welcomeMsg, .countdown-timer {
+  position: relative;
+  top: 5%;
+  left: 50%;
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+  vertical-align: middle;
+  padding: 1vh;
+  border: 2px solid grey;
+  transform: translateX(-50%);
+}
+
+.title {
+  font-size: 4vw;
+  -webkit-animation: text-blur-out 1.2s reverse both;
+  animation: text-blur-out 1.2s  reverse both;
+  letter-spacing: .25vw;
+  font-style: italic;
+  font-weight: 900;
+  position: absolute;
+}
+
+.t1 {
+  animation-delay: .25s;
+  margin-left: 2vw;
+}
+
+.t2 {
+  animation-delay: .5s;
+  margin-top: 8vh;
+  margin-left: 4vw
+}
+
+.t3 {
+  animation-delay: .75s;
+  margin-top: 16vh;
+  margin-left: 6vw
+}
+
+/* ANIMS */
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes text-blur-out {
+  0% {
+    -webkit-filter: blur(0.01);
+            filter: blur(0.01);
+  }
+  100% {
+    -webkit-filter: blur(12px) opacity(0%);
+            filter: blur(12px) opacity(0%);
+  }
+}
+@keyframes text-blur-out {
+  0% {
+    -webkit-filter: blur(0.01);
+            filter: blur(0.01);
+  }
+  100% {
+    -webkit-filter: blur(12px) opacity(0%);
+            filter: blur(12px) opacity(0%);
+  }
+}
