@@ -9,7 +9,9 @@ function App() {
 
   const triggerRound = choice => {
     const opponentSelection = makeOpponentSelection();
-    console.log(`User's: ${choice}, Opponent's: ${opponentSelection}`)
+    const winner = determineWinner(choice, opponentSelection);
+    console.log(`User chose: ${choice}, Opponent chose: ${opponentSelection}, Winner is: ${winner}`)
+    endOfRoundSequence(winner, opponentSelection)
   }
 
   const makeOpponentSelection = () => {
@@ -17,6 +19,30 @@ function App() {
     if(determinant === 0) return 'rock';
     if(determinant === 1) return 'paper';
     if(determinant === 2) return 'scissors';
+  }
+
+  const determineWinner = (choice, oppo) => {
+    if(choice === oppo) return 'draw'
+
+    if(choice === 'rock') { // user-chose-rock outcomes
+      if(oppo === 'paper') return 'opponent'
+      if(oppo === 'scissors') return 'user'
+    }
+
+    if(choice === 'paper') { // user-chose-paper outcomes
+      if(oppo === 'scissors') return 'opponent'
+      if(oppo === 'rock') return 'user'
+    }
+
+    if(choice === 'scissors') { // user-chose-scissors outcomes
+      if(oppo === 'rock') return 'opponent'
+      if(oppo === 'paper') return 'user'
+    }
+  }
+
+  const endOfRoundSequence = (whoWon, oppoSelection) => {
+    if(whoWon === 'user') setPlayerScore(playerScore + 1) 
+    if(whoWon === 'opponent') setOpponentScore(opponentScore + 1) 
   }
 
   return (
