@@ -41,8 +41,6 @@ const EndOfRoundModal = props => {
 
    return(
       <div className="modal-wrapper">
-
-         {console.log(winner, choice, oppoChoice)}
          
          <div className="round-feedback">
             { props.lastOutcome && whoWon()}

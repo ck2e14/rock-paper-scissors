@@ -38,7 +38,7 @@ function App() {
     const opponentSelection = makeOpponentSelection();
     const winner = determineWinner(choice, opponentSelection);
     setLastOutcome({winner: winner, choice: choice, oppoChoice: opponentSelection})
-    console.log(`User chose: ${choice}, Opponent chose: ${opponentSelection}, Winner is: ${winner}`)
+    // console.log(`User chose: ${choice}, Opponent chose: ${opponentSelection}, Winner is: ${winner}`)
     endOfRoundSequence(winner, opponentSelection);
   }
 
@@ -100,7 +100,7 @@ function App() {
     // TODO: Put this user feedback inside the modal. Currently it just flashes briefly because the timer hitting 0 calls triggerRound() which clears the value, thus clearing the condition to display this message. 
     
     if(!firstPagePaint) {
-      if(counter > 0) return <div className="countdown-timer">Countdown: <span>{counter}</span></div>
+      if(counter > 0) return <div id="countdown" className="countdown-timer">Countdown: <span id="countdown-span">{counter}</span></div>
     }
   }
 
@@ -108,7 +108,7 @@ function App() {
     if(activeBackgrounds === true ) {
       return (  
         <BackgroundSlider
-          images={[paperbg, scissorsbg, rocksbg]}
+          images={[ scissorsbg, paperbg, rocksbg]}
           duration={7} transition={.25} 
         />
       )
