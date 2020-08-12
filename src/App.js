@@ -20,6 +20,19 @@ function App() {
   const [ activeBackgrounds, setActiveBackgrounds ] = useState(true)
   // const [ rollNextRound, setRollNextRound ] = useState(false)
 
+
+  // General function-flow of app 
+  // 1) User selects choice
+  // 2) 'triggerRound()' is called, passed choice (first round has no time limit)
+  // 3) Opponent's choice randomly selected 
+  // 4) determineWinner() called
+  // 5) endOfRoundSequence() called to display modal feedback on win/loss/draw
+  // 6) 'Next Round' btn closes modal, passes integer to 'counter' hooked state
+  // 7) useEffect is watching 'counter' (undefined upon init to stop you losing a round straight away after first paint :P )
+  // 8) useEffect decrements counter (-1 /second). Either making a choice or timer elapsing re-calls triggerRound(), 
+  // in turn clearing counter back to undefined to kill the counter decrementing
+  // 9) if elapsed  timer, 'timer elapsed' passed as choice to determineWinner() to default the win to opponent 
+
   const triggerRound = choice => {
     setFirstPagePaint(false);
     setCounter();
@@ -68,10 +81,6 @@ function App() {
     setShowModal(false)
     setCounter(5)
   }
-
-  // useEffect(() => {
-
-  // },[])
 
   useEffect(() => {
     const countdownInterval = setInterval(() => {
