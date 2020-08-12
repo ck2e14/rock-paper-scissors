@@ -1,0 +1,22 @@
+.modal-wrapper {
+   position: fixed;
+   z-index: 99;
+   height: 40vh;
+   width: 25vw;
+   left: 50%;
+   top: 40%;
+   padding: 1vw;
+   transform: translate(-50%, -50%);
+   background-color: rgb(42, 134, 150);
+}
+
+.next-round-btn {
+   border: 2px solid white;
+   width: fit-content;
+   padding: 1vw;
+   position: relative;
+   top: 80%;
+   left: 50%;
+   transform: translateX(-50%);
+   cursor: pointer;
+}

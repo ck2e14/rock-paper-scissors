@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
 import OptionCard from './Components/OptionCard/OptionCard';
+import Modal from './Components/EndOfRoundModal/EndOfRoundModal';
 
 function App() {
 
   const [ playerScore, setPlayerScore ] = useState(0);
   const [ opponentScore, setOpponentScore ] = useState(0);
+  const [ showModal, setShowModal ] = useState(false);
 
   const triggerRound = choice => {
     const opponentSelection = makeOpponentSelection();
@@ -43,10 +45,16 @@ function App() {
   const endOfRoundSequence = (whoWon, oppoSelection) => {
     if(whoWon === 'user') setPlayerScore(playerScore + 1) 
     if(whoWon === 'opponent') setOpponentScore(opponentScore + 1) 
+    setShowModal(true)
+  }
+
+  const modalClickNextRound = () => {
+    setShowModal(false)
   }
 
   return (
     <>  
+    { showModal && <Modal nextRoundClick={modalClickNextRound} /> }
       <div className="App">
 
         <div className="scorecard">
