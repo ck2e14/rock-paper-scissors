@@ -6,9 +6,9 @@ import Modal from './Components/EndOfRoundModal/EndOfRoundModal';
 import rock from './Assets/Media/Rock.png'
 import paper from './Assets/Media/paper.png'
 import scissors from './Assets/Media/scissors.png'
-import scissorsbg from './Assets/Media/scissorsbg1.jpg'
-import rocksbg from './Assets/Media/rocksbg1.jpg'
-import paperbg from './Assets/Media/paperbg1.jpg'
+import scissorsbg from './Assets/Media/scissorsbg3.jpg'
+import rocksbg from './Assets/Media/rocksbg3.jpg'
+import paperbg from './Assets/Media/paperbg2.jpg'
 
 function App() {
 
@@ -17,6 +17,7 @@ function App() {
   const [ showModal, setShowModal ] = useState(false);
   const [ counter, setCounter ] = useState();
   const [ firstPagePaint, setFirstPagePaint ] = useState(true);
+  const [ activeBackgrounds, setActiveBackgrounds ] = useState(true)
   // const [ rollNextRound, setRollNextRound ] = useState(false)
 
   const triggerRound = choice => {
@@ -94,14 +95,30 @@ function App() {
     }
   }
 
+  const activeBackdrop = () => {
+    if(activeBackgrounds === true ) {
+      return (  
+      <BackgroundSlider
+      images={[paperbg, scissorsbg, rocksbg]}
+      duration={5} transition={.5} 
+    />)
+    }
+  }
+
+  const toggleBackdrop = () => setActiveBackgrounds(!activeBackgrounds)
+
   return (
     <>
       { showModal && <div className="shader-layer"></div> }
       { showModal && <Modal nextRoundClick={modalClickNextRound} /> }
       {/* replace hardcoded modal with function call that returns the Modal */}
-      <img src={paperbg} alt="" className="main-bg"/>
+      {/* <img src={paperbg} alt="" className="main-bg"/> */}
       <div className="App">
- 
+
+        {activeBackdrop()}
+        <div className="toggle-active-backdrop-btn" onClick={() => toggleBackdrop()}>
+          Click to toggle active backdrop
+        </div>
 
         {handleCountdownRender()}
         <div className="title t1"><span>R</span>ock</div>
