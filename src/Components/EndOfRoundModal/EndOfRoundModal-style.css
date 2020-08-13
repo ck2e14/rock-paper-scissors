@@ -41,10 +41,6 @@
    color: cyan;
 }
 
-/* .round-feedback span {
-   color: cyan;
-} */
-
 .win-span {
    color: rgb(0, 255, 0) !important;
 }
@@ -57,3 +53,20 @@
    color: cyan
 }
 
+/* BREAKPOINTS */
+@media only screen and (max-width: 420px) {
+   .round-feedback {
+      font-size: 30px;
+      width: 100%;
+   }
+   .modal-wrapper {
+      width: 75vw;
+      padding: 4%;
+      background-color: rgb(14, 14, 14);
+   }
+   .next-round-btn {
+      font-size: 20px;
+      color: rgb(100, 100, 100);
+      border-color: rgb(59, 59, 59);
+   }
+}

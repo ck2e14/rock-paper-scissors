@@ -63,6 +63,7 @@ function App() {
 
   const determineWinner = (choice, oppo) => {
     if(choice === 'timer elapsed') return 'opponent'
+
     if(choice === oppo) return 'draw'
 
     if(choice === 'rock') { // user-chose-rock outcomes
@@ -118,7 +119,7 @@ function App() {
   const toggleBackdrop = () => setActiveBackgrounds(!activeBackgrounds)
 
   return (
-    <>
+    <div className="test">
 
       { showModal && <div className="shader-layer-end-of-round"></div> }
       { showModal && <Modal nextRoundClick={modalClickNextRound} lastOutcome={lastOutcome}/> }
@@ -152,8 +153,7 @@ function App() {
 
       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet"></link>
 
-    
-    </>
+    </div>
   );
 }
 

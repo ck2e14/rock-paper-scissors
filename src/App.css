@@ -141,6 +141,56 @@
   margin-left: 6vw
 }
 
+/* BREAKPOINTS */
+@media only screen and (max-width: 420px) {
+  .options-wrapper {
+    flex-direction: column;
+  }
+  .scorecard, .welcomeMsg, .countdown-timer {
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 5%;
+    padding: 2%;
+    width: 50vw;
+    overflow: hidden !important;
+  }
+  .scorecard {
+    margin-top: 8%;
+  }
+  .App {
+    width: 90vw;
+    height: 80vh;
+    overflow: hidden;
+  }
+  .t1, .t2, .t3 {
+    margin-top: 0;
+    font-size: 30px;
+    font-style: normal;
+  }
+  .t2 {
+    margin-left: 23vw;
+  }
+  .t3 {
+    margin-left: 47vw;;
+  }
+  .test {
+    overflow: hidden;
+  }
+  .toggle-active-backdrop-btn {
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 2%;
+    border: 1px solid rgb(77, 77, 77);
+    position: fixed;
+    user-select: none;
+    color: white;
+  }
+  .toggle-active-backdrop-btn:hover {
+    border: 1px solid rgb(36, 36, 36);
+    user-select: none;
+  }
+}
+
 /* ANIMS */
 @-webkit-keyframes fade-in {
   0% {
